@@ -1,22 +1,22 @@
 <template>
     <div class = "card login__form">
         <div class ="login__fields">
-            <div class ="login__title"><h1>Books Read Login</h1></div>
+            <div class ="login__title"><b>Books Read Login</b></div>
             <br/>
         <b-field label="Username"
             :label-position="labelPosition"
             :type="username_type"
             :message="username_msg">
-            <b-input value="johnsilver" maxlength="30"></b-input>
+            <b-input :value="username_input" maxlength="30"></b-input>
         </b-field>
 
         <b-field label="Password"
             :label-position="labelPosition"
             :type="password_type"
             :message="password_msg">
-            <b-input value="123" type="password" maxlength="30"></b-input>
+            <b-input :value="password_input" type="password" maxlength="30"></b-input>
         </b-field>
-        <b-button type="is-primary" outlined>Outlined</b-button>
+        <b-button type="is-primary" outlined>Login</b-button>
         </div>
     </div>
 </template>
@@ -32,6 +32,8 @@ export default {
             username_msg:"",
             password_type:"",
             password_msg:"",
+            username_input:"",
+            password_input:"",
         }
 
     },

@@ -5067,6 +5067,11 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.npm.taobao.org/kind-of/download/kind-of-6.0.3.tgz?cache=0&sync_timestamp=1579194589153&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fkind-of%2Fdownload%2Fkind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha1-B8BQNKbDSfoG4k+jWqdttFgM5N0=
 
+ky@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/ky/-/ky-0.25.0.tgz#a0f377cb2eac05f7e8f7c9c7796f2d991656a917"
+  integrity sha512-K1Rdvz2z9ihm9iasWK3iywtrOqIFdJJ09nR6PaQ5cO7NA6MIS7RhzGn9qd206FvWf5yJIZmy0Vzaz70lhU+8ow==
+
 launch-editor-middleware@^2.2.1:
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/launch-editor-middleware/download/launch-editor-middleware-2.2.1.tgz#e14b07e6c7154b0a4b86a0fd345784e45804c157"
