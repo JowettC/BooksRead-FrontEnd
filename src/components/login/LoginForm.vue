@@ -16,7 +16,7 @@
             :message="password_msg">
             <b-input :value="password_input" type="password" maxlength="30"></b-input>
         </b-field>
-        <b-button type="is-primary" outlined>Login</b-button>
+        <b-button type="is-primary" outlined @click="submitForm">Login</b-button>
         </div>
     </div>
 </template>
@@ -38,7 +38,26 @@ export default {
 
     },
   name: 'Home',
-  components: {
+  methods: {
+      async submitForm(){
+          console.log("test")
+          const res = await this.$http
+        .post("api/user/login", {
+          json: {
+            username: this.username_input,
+            password: this.password_input,
+          },
+        })
+        .json();
+        if(res.status){
+            // success
+            console.log("success")
+            console.log(res.message)
+        }
+        else{
+            console.log(res.message)
+        }
+      }
   }
 }
 </script>
