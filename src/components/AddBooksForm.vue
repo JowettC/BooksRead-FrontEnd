@@ -2,7 +2,7 @@
   <form @submit.prevent="onSubmit">
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Add Workshop</p>
+        <p class="modal-card-title">Add Books</p>
         <button type="button" class="delete" @click="$parent.close()" />
       </header>
       <section class="modal-card-body">
@@ -60,11 +60,12 @@ export default {
       });
     },
     async onSubmit() {
+      console.log(this.book_name)
       const res = await this.$http
         .post("api/books/create", {
           json: {
-            bookName: this.title,
-            bookAuthor: this.description
+            bookName: this.book_name,
+            bookAuthor: this.book_author
           },
           headers: { Authorization: `Bearer ${this.$store.state.token}` },
         })
