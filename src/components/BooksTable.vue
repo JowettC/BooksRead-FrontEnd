@@ -22,7 +22,7 @@
           type="is-warning"
           size="is-small"
           icon-right="edit"
-          @click="$emit('edit-ws', props.row)"
+          @click="editDialog(props.row)"
         />
       </div>
     </b-table-column>
@@ -50,19 +50,19 @@ export default {
     },
   },
   methods: {
-    deleteDialog(workshop) {
+    deleteDialog(book) {
       this.$buefy.dialog.confirm({
-        title: "Deleting Workshop",
+        title: "Deleting Book",
         message:
-          "Are you sure you want to <b>delete " + workshop.title + "</b>?",
+          "Are you sure you want to <b>delete " + book.book_name + "</b>?",
         confirmText: "Confirm",
         type: "is-danger",
         hasIcon: true,
-        onConfirm: () => this.$emit("deleteWs", workshop.workshopId),
+        onConfirm: () => this.$emit("delete-book", book.books_id),
       });
     },
-    editDialog(workshop) {
-      this.$emit("editWS", workshop);
+    editDialog(book) {
+        this.$emit("edit-book", book)
     },
   },
 };
