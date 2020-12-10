@@ -1,6 +1,6 @@
 <template>
 <div class ="books__table">
-  <b-table :data="bookData" detailed detail-key="title">
+  <b-table :data="bookData"  detail-key="title">
     <b-table-column field="book_name" label="Title" v-slot="props">
       {{ props.row.book_name }}
     </b-table-column>
@@ -26,14 +26,7 @@
         />
       </div>
     </b-table-column>
-    <template slot="detail" slot-scope="props">
-      <div class="content">
-        <h3>Description</h3>
-        <p>
-          {{ props.row.description }}
-        </p>
-      </div>
-    </template>
+    
   </b-table>
   </div>
 </template>
