@@ -54,7 +54,9 @@ export default {
             console.log(res.message)
             // store token
             const token = res.accessToken;
-            console.log(token)
+            this.$store.dispatch("login", token);
+            // console.log(this.$store.state.token)
+            this.$router.push("/home");
         }
         else{
             console.log(res.message)
