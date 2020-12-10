@@ -2,25 +2,28 @@
   <div class="home">
     <div class="home__container">
       <div class="home__title">Today a READER, tomorrow a LEADER</div>
-      <add-book-modal @reload-data="getBooks()"/>
-    
-      <books-table :bookData="this.books" @delete-book="deleteBook"
-        @edit-book="editBook" />
+      <add-book-modal @reload-data="getBooks()" />
 
-        <b-modal
-      v-model="isComponentModalActive"
-      has-modal-card
-      trap-focus
-      aria-role="dialog"
-      aria-modal
-    >
-    <template>
-      <edit-book-modal 
-          :bookObj="editProps"
-          @reload-data="getBooks()"
-          @close="editProps = null"
+      <books-table
+        :bookData="this.books"
+        @delete-book="deleteBook"
+        @edit-book="editBook"
+      />
+
+      <b-modal
+        v-model="isComponentModalActive"
+        has-modal-card
+        trap-focus
+        aria-role="dialog"
+        aria-modal
+      >
+        <template>
+          <edit-book-modal
+            :bookObj="editProps"
+            @reload-data="getBooks()"
+            @close="editProps = null"
           />
-    </template>
+        </template>
       </b-modal>
     </div>
   </div>
@@ -28,15 +31,15 @@
 
 <script>
 import BooksTable from "@/components/BooksTable";
-import AddBookModal from '@/components/AddBookModal';
-import EditBookModal from '@/components/EditBookModal';
+import AddBookModal from "@/components/AddBookModal";
+import EditBookModal from "@/components/EditBookModal";
 
 export default {
   name: "Home",
   components: {
     BooksTable,
     AddBookModal,
-    EditBookModal
+    EditBookModal,
   },
   data() {
     return {
@@ -92,9 +95,9 @@ export default {
 <style>
 .home__title {
   font-size: 36px;
-  padding-bottom:50px;
 }
-.home__container{
-  padding-top:50px;
+.home__container {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 </style>

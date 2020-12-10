@@ -8,10 +8,11 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { requiresAuth: true },
   },
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -24,4 +25,31 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  const store = require("../store").default;
+  if (!store.getters.isAuthenticated) {
+    //Try to get from localstorage
+    store.dispatch("init");
+  }
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!store.getters.isAuthenticated) {
+      next({
+        path: "/",
+        query: {
+          redirect: to.fullPath,
+        },
+      });
+    } else {
+      next();
+    }
+  } else {
+    //Redirect to dashboard if user is already logged in and trying to access Login page
+    console.log(store.getters.isAuthenticated);
+    if (store.getters.isAuthenticated && to.name === "Login") {
+      next("/home");
+    } else {
+      next();
+    }
+  }
+});
 export default router

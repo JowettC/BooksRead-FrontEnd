@@ -5,6 +5,7 @@
       size="is-medium"
       @click="isComponentModalActive = true"
       expanded
+      class="add__button"
     >
       Add
     </b-button>
@@ -37,4 +38,8 @@ export default {
 };
 </script>
 <style scoped>
+.add__button{
+    max-width:1000px;
+    margin:auto;
+}
 </style>
