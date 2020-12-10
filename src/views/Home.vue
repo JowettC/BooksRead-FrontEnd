@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <div title = "Title">Today a READER, tomorrow a LEADER</div>
-    <books-table :bookData="this.books"/>
+    <div class="home__container">
+      <div class="home__title">Today a READER, tomorrow a LEADER</div>
+      <books-table :bookData="this.books" />
+    </div>
   </div>
 </template>
 
@@ -9,9 +11,9 @@
 import BooksTable from "@/components/BooksTable";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    BooksTable
+    BooksTable,
   },
   data() {
     return {
@@ -21,25 +23,31 @@ export default {
       // editProps: null,
     };
   },
-  mounted(){
+  mounted() {
     this.getBooks();
   },
-  methods:{
-    async getBooks(){
-      const res = await this.$http.get("api/books",{
-        headers: { Authorization: `Bearer ${this.$store.state.token}` }
-      }).json();
-      if (res.error){
-        console.log()
+  methods: {
+    async getBooks() {
+      const res = await this.$http
+        .get("api/books", {
+          headers: { Authorization: `Bearer ${this.$store.state.token}` },
+        })
+        .json();
+      if (res.error) {
+        console.log();
+      } else {
+        this.books = res;
       }
-      else{
-        this.books = res
-        
-      }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 <style>
-
+.home__title {
+  font-size: 36px;
+  padding-bottom:50px;
+}
+.home__container{
+  padding-top:50px;
+}
 </style>
