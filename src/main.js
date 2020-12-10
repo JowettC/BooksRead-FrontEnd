@@ -9,13 +9,15 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faTrash,
   faEdit,
-  faAngleRight
+  faAngleRight,
+  faArrowUp
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(
   faTrash,
   faEdit,
   faAngleRight,
+  faArrowUp
 )
 
 const api = ky.create({ prefixUrl: "http://localhost:3000/" });
