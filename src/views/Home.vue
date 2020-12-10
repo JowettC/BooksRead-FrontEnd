@@ -2,6 +2,7 @@
   <div class="home">
     <div class="home__container">
       <div class="home__title">Today a READER, tomorrow a LEADER</div>
+      <add-book-modal @reload-data="getBooks()"/>
       <books-table :bookData="this.books" />
     </div>
   </div>
@@ -9,11 +10,13 @@
 
 <script>
 import BooksTable from "@/components/BooksTable";
+import AddBookModal from '@/components/AddBookModal';
 
 export default {
   name: "Home",
   components: {
     BooksTable,
+    AddBookModal
   },
   data() {
     return {
