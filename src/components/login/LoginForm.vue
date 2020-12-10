@@ -7,14 +7,14 @@
             :label-position="labelPosition"
             :type="username_type"
             :message="username_msg">
-            <b-input :value="username_input" maxlength="30"></b-input>
+            <b-input v-model="username_input" maxlength="30"></b-input>
         </b-field>
 
         <b-field label="Password"
             :label-position="labelPosition"
             :type="password_type"
             :message="password_msg">
-            <b-input :value="password_input" type="password" maxlength="30"></b-input>
+            <b-input v-model="password_input" type="password" maxlength="30"></b-input>
         </b-field>
         <b-button type="is-primary" outlined @click="submitForm">Login</b-button>
         </div>
@@ -32,7 +32,7 @@ export default {
             username_msg:"",
             password_type:"",
             password_msg:"",
-            username_input:"",
+            username_input:"test",
             password_input:"",
         }
 
@@ -40,7 +40,6 @@ export default {
   name: 'Home',
   methods: {
       async submitForm(){
-          console.log("test")
           const res = await this.$http
         .post("api/user/login", {
           json: {
@@ -49,10 +48,13 @@ export default {
           },
         })
         .json();
-        if(res.status){
+        if(res.status === "Success"){
             // success
             console.log("success")
             console.log(res.message)
+            // store token
+            const token = res.accessToken;
+            console.log(token)
         }
         else{
             console.log(res.message)
