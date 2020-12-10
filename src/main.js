@@ -5,13 +5,30 @@ import Buefy from 'buefy'
 import ky from "ky";
 import 'buefy/dist/buefy.css'
 import store from './store'
-
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faTrash,
+  faEdit,
+  faAngleRight
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+library.add(
+  faTrash,
+  faEdit,
+  faAngleRight,
+)
 
 const api = ky.create({ prefixUrl: "http://localhost:3000/" });
 Vue.prototype.$http = api;
 
 Vue.config.productionTip = false
-Vue.use(Buefy)
+
+Vue.component("vue-fontawesome", FontAwesomeIcon);
+
+Vue.use(Buefy, {
+  defaultIconComponent: "vue-fontawesome",
+  defaultIconPack: "fas",
+});
 
 new Vue({
   router,
