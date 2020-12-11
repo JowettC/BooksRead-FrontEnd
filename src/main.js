@@ -20,7 +20,7 @@ library.add(
   faArrowUp
 )
 
-const api = ky.create({ prefixUrl: "http://localhost:3000/" });
+const api = ky.create({ prefixUrl: "https://us-central1-boookie-c96b3.cloudfunctions.net/app/" });
 Vue.prototype.$http = api;
 
 Vue.config.productionTip = false

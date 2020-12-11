@@ -114,9 +114,9 @@ export default {
 };
 </script>
 <style>
-.signUp__form{
+/* .signUp__form{
 
-}
+} */
 .signUp__button {
   display: inline-block;
 }

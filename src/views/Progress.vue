@@ -45,8 +45,8 @@
 <script>
 import YearlyReport from "@/components/charts/YearlyReport.vue";
 import MonthlyReport from "@/components/charts/MonthlyReport.vue";
-import MonthlyProgressReport from '@/components/charts/MonthlyProgressReport.vue'
-import YearlyProgressReport from '@/components/charts/YearlyProgressReport.vue'
+import MonthlyProgressReport from "@/components/charts/MonthlyProgressReport.vue";
+import YearlyProgressReport from "@/components/charts/YearlyProgressReport.vue";
 import * as dayjs from "dayjs";
 
 export default {
@@ -76,22 +76,26 @@ export default {
       var i;
       if (this.monthlyReport.length > 0) {
         for (i = 0; i < 12; i++) {
-          if (this.monthlyReport[i].month >= 10) {
-            const compareDate =
-              this.monthlyReport[i].year + "-" + this.monthlyReport[i].month;
-            if (this.TwelveMonths.indexOf(compareDate) >= 0) {
-              dataSet.push(this.monthlyReport[i].books_read);
+          if (this.monthlyReport[i] != null) {
+            if (this.monthlyReport[i].month >= 10) {
+              const compareDate =
+                this.monthlyReport[i].year + "-" + this.monthlyReport[i].month;
+              if (this.TwelveMonths.indexOf(compareDate) >= 0) {
+                dataSet.push(this.monthlyReport[i].books_read);
+              } else {
+                dataSet.push(0);
+              }
             } else {
-              dataSet.push(0);
+              const compareDate =
+                this.monthlyReport[i].year + "-0" + this.monthlyReport[i].month;
+              if (this.TwelveMonths.indexOf(compareDate) >= 0) {
+                dataSet.push(this.monthlyReport[i].books_read);
+              } else {
+                dataSet.push(0);
+              }
             }
           } else {
-            const compareDate =
-              this.monthlyReport[i].year + "-0" + this.monthlyReport[i].month;
-            if (this.TwelveMonths.indexOf(compareDate) >= 0) {
-              dataSet.push(this.monthlyReport[i].books_read);
-            } else {
-              dataSet.push(0);
-            }
+            dataSet.push(0);
           }
         }
         const chartData = {
@@ -104,7 +108,7 @@ export default {
             },
           ],
         };
-        return chartData ;
+        return chartData;
       }
       return null;
     },
@@ -134,11 +138,10 @@ export default {
       var total = 0;
       for (let val of this.yearlyReport) {
         dataLabel.push(val.year);
-        total += val.books_read
+        total += val.books_read;
         dataSet.push(total);
       }
-      const chartData =
-            {
+      const chartData = {
         labels: dataLabel,
         datasets: [
           {
@@ -146,59 +149,59 @@ export default {
             data: dataSet,
             backgroundColor: "transparent",
             borderColor: "rgba(1, 116, 188, 0.50)",
-            pointBackgroundColor: "rgba(171, 71, 188, 1)"
-          }
-        ]
-        };
+            pointBackgroundColor: "rgba(171, 71, 188, 1)",
+          },
+        ],
+      };
       return chartData;
     },
     getMonthlyProgress() {
-        const dataSet = [];
-        var total =0
+      const dataSet = [];
+      var total = 0;
       var i;
       if (this.monthlyReport.length > 0) {
         for (i = 0; i < 12; i++) {
-          if (this.monthlyReport[i].month >= 10) {
-            const compareDate =
-              this.monthlyReport[i].year + "-" + this.monthlyReport[i].month;
-            if (this.TwelveMonths.indexOf(compareDate) >= 0) {
-                total += (this.monthlyReport[i].books_read)
-              dataSet.push(total);
+          if (this.monthlyReport[i] != null) {
+            if (this.monthlyReport[i].month >= 10) {
+              const compareDate =
+                this.monthlyReport[i].year + "-" + this.monthlyReport[i].month;
+              if (this.TwelveMonths.indexOf(compareDate) >= 0) {
+                total += this.monthlyReport[i].books_read;
+                dataSet.push(total);
+              } else {
+                dataSet.push(total);
+              }
             } else {
-              dataSet.push(total);
-            }
-          } else {
-            const compareDate =
-              this.monthlyReport[i].year + "-0" + this.monthlyReport[i].month;
-            if (this.TwelveMonths.indexOf(compareDate) >= 0) {
-              total += (this.monthlyReport[i].books_read)
-              dataSet.push(total);
-            } else {
-              dataSet.push(total);
+              const compareDate =
+                this.monthlyReport[i].year + "-0" + this.monthlyReport[i].month;
+              if (this.TwelveMonths.indexOf(compareDate) >= 0) {
+                total += this.monthlyReport[i].books_read;
+                dataSet.push(total);
+              } else {
+                dataSet.push(total);
+              }
             }
           }
         }
 
-        const chartData =
+        const chartData = {
+          labels: this.TwelveMonths,
+          datasets: [
             {
-        labels: this.TwelveMonths,
-        datasets: [
-          {
-            label: "Books Read",
-            data: dataSet,
-            backgroundColor: "transparent",
-            borderColor: "rgba(1, 116, 188, 0.50)",
-            pointBackgroundColor: "rgba(171, 71, 188, 1)"
-          }
-        ]
-        }
-        return chartData ;
+              label: "Books Read",
+              data: dataSet,
+              backgroundColor: "transparent",
+              borderColor: "rgba(1, 116, 188, 0.50)",
+              pointBackgroundColor: "rgba(171, 71, 188, 1)",
+            },
+          ],
+        };
+        return chartData;
       }
       return null;
     },
   },
   methods: {
-
     getLast12Months() {
       const res = [];
       var i;
