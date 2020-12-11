@@ -52,7 +52,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     //Redirect to dashboard if user is already logged in and trying to access Login page
-    console.log(store.getters.isAuthenticated);
+
     if (store.getters.isAuthenticated && to.name === "Login") {
       next("/home");
     } else {

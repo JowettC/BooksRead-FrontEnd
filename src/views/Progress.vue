@@ -132,7 +132,6 @@ export default {
       const dataLabel = [];
       const dataSet = [];
       var total = 0;
-      console.log(total)
       for (let val of this.yearlyReport) {
         dataLabel.push(val.year);
         total += val.books_read
@@ -179,7 +178,6 @@ export default {
             }
           }
         }
-        console.log(dataSet)
 
         const chartData =
             {
