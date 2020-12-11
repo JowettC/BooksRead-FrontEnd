@@ -1,4 +1,5 @@
 <template>
+    <section class="login__section">
     <div class = "card login__form">
         <div class ="login__fields">
             <div class ="login__title"><b>Books Read Login</b></div>
@@ -16,9 +17,14 @@
             :message="password_msg">
             <b-input v-model="password_input" type="password" maxlength="30"></b-input>
         </b-field>
-        <b-button type="is-primary" outlined @click="submitForm">Login</b-button>
+        <b-button type="is-primary" class="login__button" @click="submitForm">Login</b-button>
+        <router-link to="/register">
+        <b-button type="is-primary" class="login__button" outlined >Register</b-button>
+        </router-link>
+    
         </div>
     </div>
+    </section>
 </template>
 <script>
 // @ is an alias to /src
@@ -39,6 +45,13 @@ export default {
     },
   name: 'Home',
   methods: {
+      danger(message) {
+      this.$buefy.toast.open({
+        duration: 5000,
+        message: message,
+        type: "is-danger",
+      });
+    },
       async submitForm(){
           const res = await this.$http
         .post("api/user/login", {
@@ -51,7 +64,6 @@ export default {
         if(res.status === "Success"){
             // success
             console.log("success")
-            console.log(res.message)
             // store token
             const token = res.accessToken;
             this.$store.dispatch("login", token);
@@ -59,16 +71,27 @@ export default {
             this.$router.push("/home");
         }
         else{
-            console.log(res.message)
+            this.danger(res.message)
         }
       }
   }
 }
 </script>
 <style>
+.login__section{
+    position:relative;
+    min-height:100vh;
+}
+.login__button{
+    display:inline-block;
+}
 .login__form{
     width: 500px;
     margin:auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .login__fields{
     padding: 50px;
