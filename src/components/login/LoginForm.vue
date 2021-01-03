@@ -54,18 +54,18 @@ export default {
     },
       async submitForm(){
           const res = await this.$http
-        .post("api/user/login", {
+        .post("user/login", {
           json: {
             username: this.username_input,
             password: this.password_input,
           },
         })
         .json();
-        if(res.status === "Success"){
+        if(!res.error){
             // success
             console.log("success")
             // store token
-            const token = res.accessToken;
+            const token = res.token;
             this.$store.dispatch("login", token);
             // console.log(this.$store.state.token)
             this.$router.push("/home");
