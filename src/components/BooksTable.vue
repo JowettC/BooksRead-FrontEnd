@@ -2,13 +2,13 @@
 <div class ="books__table">
   <b-table :data="bookData"  detail-key="title">
     <b-table-column field="book_name" label="Title" v-slot="props">
-      {{ props.row.book_name }}
+      {{ props.row.title }}
     </b-table-column>
     <b-table-column field="book_author" label="Author" v-slot="props">
-      {{ props.row.book_author }}
+      {{ props.row.author }}
     </b-table-column>
     <b-table-column field="date_created" label="DateCreated" v-slot="props">
-      {{ props.row.date_created }}
+      {{ props.row.date }}
     </b-table-column>
     <b-table-column field="actions" label="Actions" v-slot="props">
       <div class="buttons">
@@ -47,11 +47,11 @@ export default {
       this.$buefy.dialog.confirm({
         title: "Deleting Book",
         message:
-          "Are you sure you want to <b>delete " + book.book_name + "</b>?",
-        confirmText: "Confirm",
+          "Are you sure you want to delete <b>" + book.title + "</b>?",
+        confirmText: "Delete",
         type: "is-danger",
         hasIcon: true,
-        onConfirm: () => this.$emit("delete-book", book.books_id),
+        onConfirm: () => this.$emit("delete-book", book._id),
       });
     },
     editDialog(book) {
