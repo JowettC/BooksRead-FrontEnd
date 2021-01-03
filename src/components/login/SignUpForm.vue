@@ -62,7 +62,7 @@ export default {
       username_msg: "",
       password_type: "",
       password_msg: "",
-      username_input: "test",
+      username_input: "",
       password_input: "",
       password2_input: "",
     };
@@ -84,9 +84,12 @@ export default {
       });
     },
     async submitForm() {
+      if(this.username_input =="" || this.password_input == ""){
+        return this.danger("Fill in all fields!");
+      }
       if (this.password_input === this.password2_input) {
         const res = await this.$http
-          .post("api/user/register", {
+          .post("user/register", {
             json: {
               username: this.username_input,
               password: this.password_input,
@@ -94,17 +97,13 @@ export default {
           })
           .json();
         if (res.error) {
-          this.danger("User name already exist!");
+          this.danger(res.message);
         } else {
           // success
           await this.success(
             "Successfully registered, Redirecting to Login Page"
           );
-          // store token
-          // console.log(this.$store.state.token)
           this.$router.push("/");
-
-          // this.$router.push("/home");
         }
       } else {
         this.danger("Passwords Doesn't Match");
