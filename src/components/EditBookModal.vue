@@ -6,13 +6,13 @@
         <button type="button" class="delete" @click="$parent.close" />
       </header>
       <section class="modal-card-body">
-        <!-- <b-field label="Select Start Datetime">
-          <b-datetimepicker
-            v-model="dateTime"
+        <!-- <b-field label="Select Date">
+          <b-datepicker
+            v-model="date"
             append-to-body
             locale="en-SG"
             :timepicker="{ incrementMinutes: 5 }"
-          ></b-datetimepicker>
+          ></b-datepicker>
         </b-field> -->
         <b-field label="Book Title">
           <b-input v-model="book_name" required></b-input>
@@ -49,11 +49,13 @@ export default {
     return {
       book_name: null,
       book_author: null,
+      date:null,
     };
   },
   mounted() {
-    this.book_name = this.bookObj.book_name;
-    this.book_author = this.bookObj.book_author;
+    this.book_name = this.bookObj.title;
+    this.book_author = this.bookObj.author;
+    this.date = this.bookObj.date;
   },
   computed: {
     isDataFilled() {
