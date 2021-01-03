@@ -62,19 +62,20 @@ export default {
     },
     async getBooks() {
       const res = await this.$http
-        .get("api/books", {
+        .get("books", {
           headers: { Authorization: `Bearer ${this.$store.state.token}` },
         })
         .json();
       if (res.error) {
         console.log();
       } else {
-        this.books = res;
+        this.books = res.data;
+        console.log(this.books)
       }
     },
     async deleteBook(books_id) {
       const res = await this.$http
-        .delete(`api/books/${books_id}`, {
+        .delete(`books/${books_id}`, {
           headers: { Authorization: `Bearer ${this.$store.state.token}` },
         })
         .json();
@@ -86,6 +87,7 @@ export default {
       }
     },
     editBook(bookObj) {
+      console.log(bookObj)
       this.editProps = bookObj;
       this.isComponentModalActive = true;
     },
