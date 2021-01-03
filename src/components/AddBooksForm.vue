@@ -12,13 +12,14 @@
         <b-field label="Book Author">
           <b-input v-model="book_author" required></b-input>
         </b-field>
-        <!-- <b-field label="Select Date">
-          <b-datetimepicker
+        <b-field label="Select Date">
+          <b-datepicker 
             v-model="dateTime"
             append-to-body
             locale="en-SG"
             :timepicker="{ incrementMinutes: 5 }"
-          ></b-datetimepicker> -->
+          ></b-datepicker >
+          </b-field>
       </section>
 
       <footer class="modal-card-foot">
@@ -36,6 +37,7 @@
 </template>
 
 <script>
+import * as dayjs from 'dayjs'
 export default {
   data() {
     return {
@@ -59,13 +61,17 @@ export default {
         type: "is-success",
       });
     },
+    formatDate(value) {
+      return dayjs(value).format("DD/MM/YYYY");
+    },
     async onSubmit() {
-      console.log(this.book_name)
+      this.dateTime = dayjs(this.dateTime).toDate();
       const res = await this.$http
-        .post("api/books/create", {
+        .post("books", {
           json: {
-            bookName: this.book_name,
-            bookAuthor: this.book_author
+            title: this.book_name,
+            author: this.book_author,
+            date: this.formatDate(this.dateTime)
           },
           headers: { Authorization: `Bearer ${this.$store.state.token}` },
         })
